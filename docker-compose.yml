@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - mongo
+      - rabbitmq
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - POSTGRES_URL=postgres://example:example@postgres:5432/banking_db?sslmode=disable
+      - MONGODB_URL=mongodb://mongo:27017/banking_ledger
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: example
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: banking_db
+    ports:
+      - "5432:5432"  # Expose port for external access (optional)
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017" # Expose port for external access (optional)
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  transaction-processor:  # New service
+    build:
+      context: .
+      dockerfile: Dockerfile.transaction 
+    depends_on:
+      - rabbitmq
+      - postgres
+      - mongo
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - POSTGRES_URL=postgres://example:example@postgres:5432/banking_db?sslmode=disable
+      - MONGODB_URL=mongodb://mongo:27017/banking_ledger
