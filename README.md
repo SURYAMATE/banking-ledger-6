@@ -22,27 +22,6 @@ The Banking Ledger Service is a RESTful API built with Go (Golang) that allows u
 -   **RabbitMQ**: Message broker for managing transaction requests asynchronously, ensuring reliable message delivery.
 -   **Docker**: Containerization technology for deploying the application and its dependencies.
 -   **Gorilla Mux**: HTTP request router and dispatcher.
-## project structure
-banking-ledger-6/
-├── api/
-│ ├── Dockerfile # Dockerfile for the API Gateway
-│ ├── main.go # Entry point for the API Gateway, # API request handlers,# Defines API routes
-├── db/
-│ ├── postgres.go # PostgreSQL database interactions
-│ └── mongo.go # MongoDB database interactions
-├── models/
-│ ├── account.go # Defines the Account model
-│ └── transaction.go # Defines the Transaction and TransactionRequest models
-├── queue/
-│ ├── rabbitmq.go # RabbitMQ integration
-├── transactions/
-│ ├── Dockerfile # Dockerfile for the Transaction Processor
-│ ├── processor.go # Transaction processing logic
-│ └── worker.go # Consumes transactions from RabbitMQ and processes them
-├── tests/
-│ ├── api_test.go # Integration tests for the API Gateway
-│ └── processor_test.go # Unit tests for the Transaction Processor
-└── docker-compose.yml # Defines services, networks, and volumes for multi-container Docker applications
 
 ## Getting Started
 
@@ -59,7 +38,7 @@ Make sure you have the following installed:
 1.  Clone the repository:
 
     ```
-    git clone https://github.com/your-username/banking-ledger-service.git
+    git clone https://github.com/SURYAMATE/banking-ledger-6.git
     cd banking-ledger-service
     ```
 
