@@ -54,6 +54,8 @@ Make sure you have the following installed:
     -   Start the required services: `api`, `postgres`, `mongo`, `rabbitmq`, and `transaction-processor`.
     -   Create networks and volumes for the services to communicate and persist data.
 
+Note : api or transcation container may fail to start restarting will resolve it
+
 3.  The API will be accessible at `http://localhost:8080`.
 
 ## API Endpoints
